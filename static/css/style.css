@@ -1,0 +1,31 @@
+.input-lable {
+    font-weight: bold;
+    font-size: large;   
+    text-align: right;
+}
+
+.toolbar {
+    border-bottom: 1px solid lightgray;
+}
+
+
+@media screen and (max-width: 800px) {
+
+    .input-lable {
+        text-align: left;
+    }
+
+}
+
+.form-group {
+    margin-top: 16px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}

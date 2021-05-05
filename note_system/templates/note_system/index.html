@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's note</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+<body>
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: green;">
+            <img src="{% static 'images/navbar_icon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+                LET'S NOTE 
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'entry' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Feature</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" action="/logout/" method="GET">
+                <button class="btn btn-outline-success" type="submit">{{ username }}/Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <br>
+
+      <!-- Tool bar -->
+    <div class="container mt-5 mb-4 py-3 toolbar">
+      <div class="row">
+        <div class="col-sm-3">
+          <h5>Total: {{total_notes}}</h5>
+        </div>
+
+
+        <div class="col-sm-6">
+          <form action="/search/">
+            <div class="input-group">
+              <input type="search" class="form-control rounded" placeholder="Enter keywords" aria-label="Search"
+                aria-describedby="search-addon" name="keywords" />
+              <button type="submit" class="btn btn-success">Search</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-sm-3 mt-lg-0 mt-2">
+          <a href="{% url 'new_note' %}" class="btn btn-success">New note</a>
+        </div>
+
+      </div>
+    </div>
+
+      <!-- Note list -->
+
+    <div class="container mb-5">
+      <div class="row">
+
+        {% for item in noteitems %}
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <div class="card-body">
+              <h5 class="card-title"> {{ item.get_shorten_subject }}</h5>
+              <p class="card-text"> {{ item.get_shorten_content }} </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'note_edit' note_id=item.id type=1 %}" type="button" class="btn btn-sm btn-outline-success">View</a>
+                  <a href="{% url 'delete_note' note_id=item.id %}" class="btn btn-sm btn-outline-success">Delete</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              Created at {{ item.get_created_time }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+
+      <!-- end note list -->
+      
+
+      <footer class="py-3 bg-dark">
+        <div class="container">
+          <span>Place sticky footer content here.</span>
+        </div>
+      </footer>
+
+      <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>

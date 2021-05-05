@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's note</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+<body>
+    <!-- Navbar -->
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: green;">
+            <img src="{% static 'images/navbar_icon.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+                LET'S NOTE 
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'entry' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Feature</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About us</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" action="/logout/" method="GET">
+                <button class="btn btn-outline-success" type="submit">{{ username }}/Logout</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <br>
+
+    <div class="container my-5">
+
+      <form action="/add_new_note/" method="GET">
+        <div class="form-group">
+          <label for="note-subject"><h5>Subject</h5></label>
+          <input type="text" name="note_subject" class="form-control" id="note-subject" aria-describedby="subjectHelp" placeholder="Enter subject">
+          <small id="subjectHelp" class="form-text text-muted">Everynote must have a subject!</small>
+        </div>
+        <div class="form-group">
+          <label for="note-content"><h5>Content</h5></label>
+          <textarea name="note_content" style="width: 100%; font-size: 18px; line-height: 140%" name="notecontent" class="form-control textarea" id="note-content" placeholder="Note Content" tabindex="2" rows="19"></textarea>
+        </div>
+        <br>
+        <button type="submit" class="mb-4 btn btn-success">Save</button>
+      </form>
+    </div>
+
+      <!-- footer -->
+      <footer class="mt-5 py-3 bg-dark">
+        <div class="container">
+          <span>Place sticky footer content here.</span>
+        </div>
+      </footer>
+
+      <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+</body>
+</html>
